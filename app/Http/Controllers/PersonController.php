@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ActivityLog;
 use App\Models\Organization;
 use App\Models\Person;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
 class PersonController extends Controller
@@ -46,9 +48,17 @@ class PersonController extends Controller
             'title' => 'nullable|string|max:255',
             'department' => 'nullable|string|max:255',
             'notes' => 'nullable|string',
+            'avatar' => 'nullable|image|max:2048',
         ]);
 
-        $organization->people()->create($validated);
+        if ($request->hasFile('avatar')) {
+            $validated['avatar'] = $request->file('avatar')->store('avatars', 'public');
+        }
+        unset($validated['avatar_file']);
+
+        $person = $organization->people()->create($validated);
+
+        ActivityLog::log('created', 'Person', $person->id, $person->full_name, $organization->id);
 
         return redirect()->route('organizations.persons.index', $organization)
             ->with('success', 'Person added successfully.');
@@ -79,9 +89,19 @@ class PersonController extends Controller
             'department' => 'nullable|string|max:255',
             'notes' => 'nullable|string',
             'is_active' => 'boolean',
+            'avatar' => 'nullable|image|max:2048',
         ]);
 
+        if ($request->hasFile('avatar')) {
+            if ($person->avatar) {
+                Storage::disk('public')->delete($person->avatar);
+            }
+            $validated['avatar'] = $request->file('avatar')->store('avatars', 'public');
+        }
+
         $person->update($validated);
+
+        ActivityLog::log('updated', 'Person', $person->id, $person->full_name, $organization->id);
 
         return redirect()->route('organizations.persons.index', $organization)
             ->with('success', 'Person updated successfully.');
@@ -91,7 +111,10 @@ class PersonController extends Controller
     {
         $this->authorizeOrganization($organization);
 
+        $name = $person->full_name;
         $person->delete();
+
+        ActivityLog::log('deleted', 'Person', null, $name, $organization->id);
 
         return redirect()->route('organizations.persons.index', $organization)
             ->with('success', 'Person removed successfully.');

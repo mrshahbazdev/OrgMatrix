@@ -9,7 +9,8 @@
         "profile": "Profil",
         "login": "Anmelden",
         "register": "Registrieren",
-        "logout": "Abmelden"
+        "logout": "Abmelden",
+        "activity_log": "Aktivitätsprotokoll"
     },
     "landing": {
         "hero_title": "Ihre Organisation visualisieren & stärken",
@@ -68,8 +69,20 @@
         "create_first": "Erste Organisation erstellen",
         "total_roles": "Gesamtrollen",
         "total_people": "Gesamtpersonen",
+        "total_organizations": "Organisationen",
+        "total_assignments": "Zuweisungen",
         "view_chart": "Organigramm anzeigen",
-        "manage": "Verwalten"
+        "manage": "Verwalten",
+        "analytics": "Analytik-Übersicht",
+        "criticality_chart": "Rollen nach Kritikalität",
+        "department_chart": "Rollen nach Abteilung",
+        "coverage_chart": "Rollenabdeckung",
+        "recent_activity": "Letzte Aktivitäten",
+        "risk_roles": "Gefährdete Rollen",
+        "risk_roles_desc": "Hohe/kritische Rollen ohne Zuweisungen",
+        "filled": "Besetzt",
+        "vacant": "Vakant",
+        "no_activity": "Noch keine Aktivitäten"
     },
     "organizations": {
         "title": "Organisationen",
@@ -105,7 +118,10 @@
         "no_roles": "Noch keine Rollen definiert.",
         "assign_person": "Person zuweisen",
         "primary": "Primär",
-        "delete_confirm": "Sind Sie sicher, dass Sie diese Rolle löschen möchten?"
+        "delete_confirm": "Sind Sie sicher, dass Sie diese Rolle löschen möchten?",
+        "coverage": "Abdeckung",
+        "no_backup": "Keine Vertretung",
+        "at_risk": "Gefährdet"
     },
     "persons": {
         "title": "Personen",
@@ -120,7 +136,9 @@
         "notes": "Notizen",
         "no_persons": "Noch keine Personen hinzugefügt.",
         "assigned_roles": "Zugewiesene Rollen",
-        "delete_confirm": "Sind Sie sicher, dass Sie diese Person entfernen möchten?"
+        "delete_confirm": "Sind Sie sicher, dass Sie diese Person entfernen möchten?",
+        "avatar": "Profilfoto",
+        "upload_avatar": "Foto hochladen"
     },
     "assignments": {
         "title": "Person einer Rolle zuweisen",
@@ -138,7 +156,29 @@
         "zoom_in": "Vergrößern",
         "zoom_out": "Verkleinern",
         "reset": "Ansicht zurücksetzen",
-        "vacant": "Vakant"
+        "vacant": "Vakant",
+        "fullscreen": "Vollbild",
+        "exit_fullscreen": "Vollbild beenden",
+        "click_to_edit": "Klicken zum Bearbeiten"
+    },
+    "import_export": {
+        "export_roles": "Rollen CSV exportieren",
+        "export_people": "Personen CSV exportieren",
+        "import_roles": "Rollen CSV importieren",
+        "import_people": "Personen CSV importieren",
+        "select_file": "CSV-Datei auswählen",
+        "import": "Importieren",
+        "export": "Exportieren"
+    },
+    "activity": {
+        "title": "Aktivitätsprotokoll",
+        "created": "Erstellt",
+        "updated": "Aktualisiert",
+        "deleted": "Gelöscht",
+        "assigned": "Zugewiesen",
+        "unassigned": "Zuweisung entfernt",
+        "imported": "Importiert",
+        "no_activity": "Noch keine Aktivitäten aufgezeichnet."
     },
     "common": {
         "save": "Speichern",
@@ -152,6 +192,12 @@
         "loading": "Laden...",
         "confirm": "Bestätigen",
         "yes": "Ja",
-        "no": "Nein"
+        "no": "Nein",
+        "filter": "Filter",
+        "all": "Alle",
+        "clear_filters": "Filter löschen",
+        "no_results": "Keine Ergebnisse gefunden",
+        "dark_mode": "Dunkelmodus",
+        "light_mode": "Hellmodus"
     }
 }

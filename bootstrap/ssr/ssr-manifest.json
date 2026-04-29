@@ -6,6 +6,9 @@
   "resources/js/Components/DangerButton.vue": [
     "/build/assets/DeleteUserForm-BjKvmK82.js"
   ],
+  "resources/js/Components/DarkModeToggle.vue": [
+    "/build/assets/AuthenticatedLayout-C7ouL3e5.js"
+  ],
   "resources/js/Components/InputError.vue": [
     "/build/assets/TextInput-vfWly7IM.js"
   ],
@@ -27,14 +30,20 @@
   "resources/js/Components/TextInput.vue": [
     "/build/assets/TextInput-vfWly7IM.js"
   ],
+  "resources/js/Components/ToastNotification.vue": [
+    "/build/assets/AuthenticatedLayout-C7ouL3e5.js"
+  ],
   "resources/js/Layouts/AuthenticatedLayout.vue": [
-    "/build/assets/AuthenticatedLayout-Cwxv3suN.js"
+    "/build/assets/AuthenticatedLayout-C7ouL3e5.js"
   ],
   "resources/js/Layouts/GuestLayout.vue": [
     "/build/assets/GuestLayout-7rtMOgD2.js"
   ],
+  "resources/js/Pages/ActivityLog/Index.vue": [
+    "/build/assets/Index-6rZgvOe1.js"
+  ],
   "resources/js/Pages/Assignments/Create.vue": [
-    "/build/assets/Create-BXqkHIRD.js"
+    "/build/assets/Create-D7eOzpNM.js"
   ],
   "resources/js/Pages/Auth/ConfirmPassword.vue": [
     "/build/assets/ConfirmPassword-CEOaFOKq.js"
@@ -55,34 +64,34 @@
     "/build/assets/VerifyEmail-Sh_cV20p.js"
   ],
   "resources/js/Pages/Dashboard.vue": [
-    "/build/assets/Dashboard-CKb569Tq.js"
+    "/build/assets/Dashboard-Ci18P7DJ.js"
   ],
   "resources/js/Pages/OrgChart/Index.vue": [
-    "/build/assets/Index-CcnhS6ZU.js"
+    "/build/assets/Index-fENg3r-o.js"
   ],
   "resources/js/Pages/Organizations/Create.vue": [
-    "/build/assets/Create-B9x3gtct.js"
+    "/build/assets/Create-ChNv_2fR.js"
   ],
   "resources/js/Pages/Organizations/Edit.vue": [
-    "/build/assets/Edit-XA6gGjyB.js"
+    "/build/assets/Edit-DRY4C4t7.js"
   ],
   "resources/js/Pages/Organizations/Index.vue": [
-    "/build/assets/Index-DFgDkQPy.js"
+    "/build/assets/Index-B_ryUUnr.js"
   ],
   "resources/js/Pages/Organizations/Show.vue": [
-    "/build/assets/Show-Ces-f1db.js"
+    "/build/assets/Show-DqeM5nGC.js"
   ],
   "resources/js/Pages/Persons/Create.vue": [
-    "/build/assets/Create-Cer2HWBv.js"
+    "/build/assets/Create-BqY_TaEF.js"
   ],
   "resources/js/Pages/Persons/Edit.vue": [
-    "/build/assets/Edit-DeZuUnP6.js"
+    "/build/assets/Edit-i-oZx8OC.js"
   ],
   "resources/js/Pages/Persons/Index.vue": [
-    "/build/assets/Index-ByuV6-Xc.js"
+    "/build/assets/Index-Ml0ffeNF.js"
   ],
   "resources/js/Pages/Profile/Edit.vue": [
-    "/build/assets/Edit-QRSvDQ1d.js"
+    "/build/assets/Edit-CqYdFhwe.js"
   ],
   "resources/js/Pages/Profile/Partials/DeleteUserForm.vue": [
     "/build/assets/DeleteUserForm-BjKvmK82.js"
@@ -94,13 +103,13 @@
     "/build/assets/UpdateProfileInformationForm-BnkjDMej.js"
   ],
   "resources/js/Pages/Roles/Create.vue": [
-    "/build/assets/Create-CJlnlh6Y.js"
+    "/build/assets/Create-UnooNnFZ.js"
   ],
   "resources/js/Pages/Roles/Edit.vue": [
-    "/build/assets/Edit-ChtRZCnY.js"
+    "/build/assets/Edit-BBPk_OzI.js"
   ],
   "resources/js/Pages/Roles/Index.vue": [
-    "/build/assets/Index-Cqyg58J8.js"
+    "/build/assets/Index-Dg4sFK63.js"
   ],
   "resources/js/Pages/Welcome.vue": [
     "/build/assets/Welcome-DCWiwsZV.js"

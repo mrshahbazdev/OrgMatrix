@@ -9,7 +9,8 @@
         "profile": "Profile",
         "login": "Log In",
         "register": "Register",
-        "logout": "Log Out"
+        "logout": "Log Out",
+        "activity_log": "Activity Log"
     },
     "landing": {
         "hero_title": "Visualize & Strengthen Your Organization",
@@ -68,8 +69,20 @@
         "create_first": "Create Your First Organization",
         "total_roles": "Total Roles",
         "total_people": "Total People",
+        "total_organizations": "Organizations",
+        "total_assignments": "Assignments",
         "view_chart": "View Org Chart",
-        "manage": "Manage"
+        "manage": "Manage",
+        "analytics": "Analytics Overview",
+        "criticality_chart": "Roles by Criticality",
+        "department_chart": "Roles by Department",
+        "coverage_chart": "Role Coverage",
+        "recent_activity": "Recent Activity",
+        "risk_roles": "At-Risk Roles",
+        "risk_roles_desc": "High/critical roles without assignments",
+        "filled": "Filled",
+        "vacant": "Vacant",
+        "no_activity": "No activity yet"
     },
     "organizations": {
         "title": "Organizations",
@@ -105,7 +118,10 @@
         "no_roles": "No roles defined yet.",
         "assign_person": "Assign Person",
         "primary": "Primary",
-        "delete_confirm": "Are you sure you want to delete this role?"
+        "delete_confirm": "Are you sure you want to delete this role?",
+        "coverage": "Coverage",
+        "no_backup": "No Backup",
+        "at_risk": "At Risk"
     },
     "persons": {
         "title": "People",
@@ -120,7 +136,9 @@
         "notes": "Notes",
         "no_persons": "No people added yet.",
         "assigned_roles": "Assigned Roles",
-        "delete_confirm": "Are you sure you want to remove this person?"
+        "delete_confirm": "Are you sure you want to remove this person?",
+        "avatar": "Profile Photo",
+        "upload_avatar": "Upload Photo"
     },
     "assignments": {
         "title": "Assign Person to Role",
@@ -138,7 +156,29 @@
         "zoom_in": "Zoom In",
         "zoom_out": "Zoom Out",
         "reset": "Reset View",
-        "vacant": "Vacant"
+        "vacant": "Vacant",
+        "fullscreen": "Fullscreen",
+        "exit_fullscreen": "Exit Fullscreen",
+        "click_to_edit": "Click to edit"
+    },
+    "import_export": {
+        "export_roles": "Export Roles CSV",
+        "export_people": "Export People CSV",
+        "import_roles": "Import Roles CSV",
+        "import_people": "Import People CSV",
+        "select_file": "Select CSV File",
+        "import": "Import",
+        "export": "Export"
+    },
+    "activity": {
+        "title": "Activity Log",
+        "created": "Created",
+        "updated": "Updated",
+        "deleted": "Deleted",
+        "assigned": "Assigned",
+        "unassigned": "Unassigned",
+        "imported": "Imported",
+        "no_activity": "No activity recorded yet."
     },
     "common": {
         "save": "Save",
@@ -152,6 +192,12 @@
         "loading": "Loading...",
         "confirm": "Confirm",
         "yes": "Yes",
-        "no": "No"
+        "no": "No",
+        "filter": "Filter",
+        "all": "All",
+        "clear_filters": "Clear Filters",
+        "no_results": "No results found",
+        "dark_mode": "Dark Mode",
+        "light_mode": "Light Mode"
     }
 }

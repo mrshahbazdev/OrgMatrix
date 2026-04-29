@@ -36,6 +36,7 @@ class OrgChartController extends Controller
 
             $tree[] = [
                 'id' => $role->id,
+                'role_id' => $role->id,
                 'name' => $role->name,
                 'department' => $role->department,
                 'criticality' => $role->criticality,
