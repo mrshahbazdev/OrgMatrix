@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ActivityLog;
 use App\Models\Organization;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -35,6 +36,8 @@ class OrganizationController extends Controller
         ]);
 
         $organization = Auth::user()->organizations()->create($validated);
+
+        ActivityLog::log('created', 'Organization', $organization->id, $organization->name);
 
         return redirect()->route('organizations.show', $organization)
             ->with('success', 'Organization created successfully.');
@@ -83,6 +86,8 @@ class OrganizationController extends Controller
 
         $organization->update($validated);
 
+        ActivityLog::log('updated', 'Organization', $organization->id, $organization->name, $organization->id);
+
         return redirect()->route('organizations.show', $organization)
             ->with('success', 'Organization updated successfully.');
     }
@@ -91,7 +96,10 @@ class OrganizationController extends Controller
     {
         $this->authorizeOrganization($organization);
 
+        $name = $organization->name;
         $organization->delete();
+
+        ActivityLog::log('deleted', 'Organization', null, $name);
 
         return redirect()->route('organizations.index')
             ->with('success', 'Organization deleted successfully.');

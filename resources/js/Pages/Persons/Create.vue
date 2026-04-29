@@ -7,19 +7,27 @@ const { t } = useI18n();
 const props = defineProps({ organization: Object });
 
 const form = useForm({
-    first_name: '', last_name: '', email: '', phone: '', title: '', department: '', notes: '',
+    first_name: '', last_name: '', email: '', phone: '', title: '', department: '', notes: '', avatar: null,
 });
 
-const submit = () => form.post(route('organizations.persons.store', props.organization.id));
+const avatarPreview = null;
+
+const handleAvatar = (e) => {
+    form.avatar = e.target.files[0];
+};
+
+const submit = () => form.post(route('organizations.persons.store', props.organization.id), {
+    forceFormData: true,
+});
 </script>
 
 <template>
     <AuthenticatedLayout>
-        <template #header><h1 class="text-xl font-semibold text-gray-900">{{ t('persons.create') }}</h1></template>
+        <template #header><h1 class="text-xl font-semibold text-gray-900 dark:text-white">{{ t('persons.create') }}</h1></template>
         <Head :title="t('persons.create')" />
 
         <div class="mx-auto max-w-2xl">
-            <div class="rounded-2xl border border-gray-100 bg-white p-8 shadow-sm">
+            <div class="rounded-2xl border border-gray-100 dark:border-gray-700 bg-white dark:bg-gray-800 p-8 shadow-sm">
                 <form @submit.prevent="submit" class="space-y-6">
                     <div class="grid grid-cols-2 gap-4">
                         <div>
@@ -54,8 +62,12 @@ const submit = () => form.post(route('organizations.persons.store', props.organi
                         </div>
                     </div>
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1.5">{{ t('persons.notes') }}</label>
-                        <textarea v-model="form.notes" rows="3" class="block w-full rounded-xl border-gray-200 bg-gray-50 px-4 py-3 text-sm focus:border-indigo-500 focus:bg-white focus:ring-indigo-500 transition"></textarea>
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">{{ t('persons.notes') }}</label>
+                        <textarea v-model="form.notes" rows="3" class="block w-full rounded-xl border-gray-200 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 px-4 py-3 text-sm text-gray-900 dark:text-white focus:border-indigo-500 focus:bg-white dark:focus:bg-gray-600 focus:ring-indigo-500 transition"></textarea>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">{{ t('persons.avatar') }}</label>
+                        <input type="file" accept="image/*" @change="handleAvatar" class="block w-full text-sm text-gray-500 dark:text-gray-400 file:mr-4 file:rounded-lg file:border-0 file:bg-indigo-50 dark:file:bg-indigo-900/30 file:px-4 file:py-2 file:text-sm file:font-medium file:text-indigo-700 dark:file:text-indigo-400" />
                     </div>
                     <div class="flex gap-3 pt-4">
                         <button type="submit" :disabled="form.processing" class="rounded-xl bg-indigo-600 px-6 py-3 text-sm font-semibold text-white shadow-sm hover:bg-indigo-700 transition disabled:opacity-50">{{ t('common.create') }}</button>

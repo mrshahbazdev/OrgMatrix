@@ -3,6 +3,8 @@ import { ref } from 'vue';
 import { Link, usePage } from '@inertiajs/vue3';
 import { useI18n } from 'vue-i18n';
 import LanguageSwitcher from '@/Components/LanguageSwitcher.vue';
+import DarkModeToggle from '@/Components/DarkModeToggle.vue';
+import ToastNotification from '@/Components/ToastNotification.vue';
 
 const { t } = useI18n();
 const page = usePage();
@@ -12,16 +14,23 @@ const mobileMenuOpen = ref(false);
 const navigation = [
     { name: () => t('nav.dashboard'), href: 'dashboard', icon: 'M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6' },
     { name: () => t('nav.organizations'), href: 'organizations.index', icon: 'M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4' },
+    { name: () => t('nav.activity_log'), href: 'activity-log', icon: 'M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z' },
 ];
 </script>
 
 <template>
-    <div class="min-h-screen bg-gray-50">
+    <div class="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-200">
+        <ToastNotification />
+
+        <!-- Mobile Menu Overlay -->
+        <div v-if="mobileMenuOpen" class="fixed inset-0 z-[60] bg-black/50 lg:hidden" @click="mobileMenuOpen = false"></div>
+
         <!-- Sidebar -->
         <aside
             :class="[
-                'fixed inset-y-0 left-0 z-50 flex flex-col bg-gradient-to-b from-indigo-900 via-indigo-800 to-indigo-900 transition-all duration-300',
-                sidebarOpen ? 'w-64' : 'w-20'
+                'fixed inset-y-0 left-0 z-[70] flex flex-col bg-gradient-to-b from-indigo-900 via-indigo-800 to-indigo-900 transition-all duration-300',
+                sidebarOpen ? 'w-64' : 'w-20',
+                mobileMenuOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
             ]"
         >
             <!-- Logo -->
@@ -34,9 +43,14 @@ const navigation = [
                     </div>
                     <span v-if="sidebarOpen" class="text-lg font-bold text-white">OrgMatrix</span>
                 </Link>
-                <button @click="sidebarOpen = !sidebarOpen" class="text-white/60 hover:text-white">
+                <button @click="sidebarOpen = !sidebarOpen" class="hidden lg:block text-white/60 hover:text-white">
                     <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+                <button @click="mobileMenuOpen = false" class="lg:hidden text-white/60 hover:text-white">
+                    <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                     </svg>
                 </button>
             </div>
@@ -47,6 +61,7 @@ const navigation = [
                     v-for="item in navigation"
                     :key="item.href"
                     :href="route(item.href)"
+                    @click="mobileMenuOpen = false"
                     :class="[
                         'flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-all duration-200',
                         route().current(item.href.split('.')[0] + '*')
@@ -79,33 +94,29 @@ const navigation = [
         </aside>
 
         <!-- Main Content -->
-        <div :class="['transition-all duration-300', sidebarOpen ? 'ml-64' : 'ml-20']">
+        <div :class="['transition-all duration-300', sidebarOpen ? 'lg:ml-64' : 'lg:ml-20']">
             <!-- Top Bar -->
-            <header class="sticky top-0 z-40 flex h-16 items-center justify-between border-b border-gray-200 bg-white/80 px-6 backdrop-blur-sm">
-                <div>
-                    <slot name="header" />
+            <header class="sticky top-0 z-40 flex h-16 items-center justify-between border-b border-gray-200 dark:border-gray-700 bg-white/80 dark:bg-gray-800/80 px-4 sm:px-6 backdrop-blur-sm">
+                <div class="flex items-center gap-3">
+                    <button @click="mobileMenuOpen = true" class="lg:hidden text-gray-500 hover:text-gray-700 dark:text-gray-400">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                    <div>
+                        <slot name="header" />
+                    </div>
                 </div>
-                <div class="flex items-center gap-4">
-                    <Link :href="route('profile.edit')" class="text-sm text-gray-500 hover:text-gray-700">
+                <div class="flex items-center gap-3">
+                    <DarkModeToggle />
+                    <Link :href="route('profile.edit')" class="text-sm text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
                         {{ t('nav.profile') }}
                     </Link>
                 </div>
             </header>
 
-            <!-- Flash Messages -->
-            <div v-if="page.props.flash?.success" class="mx-6 mt-4">
-                <div class="rounded-xl border border-green-200 bg-green-50 p-4 text-sm text-green-700">
-                    {{ page.props.flash.success }}
-                </div>
-            </div>
-            <div v-if="page.props.flash?.error" class="mx-6 mt-4">
-                <div class="rounded-xl border border-red-200 bg-red-50 p-4 text-sm text-red-700">
-                    {{ page.props.flash.error }}
-                </div>
-            </div>
-
             <!-- Page Content -->
-            <main class="p-6">
+            <main class="p-4 sm:p-6">
                 <slot />
             </main>
         </div>

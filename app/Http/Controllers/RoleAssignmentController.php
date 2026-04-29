@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ActivityLog;
 use App\Models\Organization;
 use App\Models\Role;
 use App\Models\RoleAssignment;
@@ -42,7 +43,10 @@ class RoleAssignmentController extends Controller
             $role->assignments()->update(['is_primary' => false]);
         }
 
-        $role->assignments()->create($validated);
+        $assignment = $role->assignments()->create($validated);
+        $person = $assignment->person;
+
+        ActivityLog::log('assigned', 'RoleAssignment', $assignment->id, $person->full_name . ' -> ' . $role->name, $organization->id);
 
         return redirect()->route('organizations.roles.index', $organization)
             ->with('success', 'Person assigned to role successfully.');
@@ -52,7 +56,10 @@ class RoleAssignmentController extends Controller
     {
         $this->authorizeOrganization($organization);
 
+        $desc = ($assignment->person->full_name ?? '') . ' -> ' . ($role->name ?? '');
         $assignment->delete();
+
+        ActivityLog::log('unassigned', 'RoleAssignment', null, $desc, $organization->id);
 
         return redirect()->route('organizations.roles.index', $organization)
             ->with('success', 'Assignment removed successfully.');

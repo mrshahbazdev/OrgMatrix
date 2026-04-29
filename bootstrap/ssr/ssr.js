@@ -411,7 +411,8 @@ const nav$1 = {
   profile: "Profile",
   login: "Log In",
   register: "Register",
-  logout: "Log Out"
+  logout: "Log Out",
+  activity_log: "Activity Log"
 };
 const landing$1 = {
   hero_title: "Visualize & Strengthen Your Organization",
@@ -470,8 +471,20 @@ const dashboard$1 = {
   create_first: "Create Your First Organization",
   total_roles: "Total Roles",
   total_people: "Total People",
+  total_organizations: "Organizations",
+  total_assignments: "Assignments",
   view_chart: "View Org Chart",
-  manage: "Manage"
+  manage: "Manage",
+  analytics: "Analytics Overview",
+  criticality_chart: "Roles by Criticality",
+  department_chart: "Roles by Department",
+  coverage_chart: "Role Coverage",
+  recent_activity: "Recent Activity",
+  risk_roles: "At-Risk Roles",
+  risk_roles_desc: "High/critical roles without assignments",
+  filled: "Filled",
+  vacant: "Vacant",
+  no_activity: "No activity yet"
 };
 const organizations$1 = {
   title: "Organizations",
@@ -507,7 +520,10 @@ const roles$1 = {
   no_roles: "No roles defined yet.",
   assign_person: "Assign Person",
   primary: "Primary",
-  delete_confirm: "Are you sure you want to delete this role?"
+  delete_confirm: "Are you sure you want to delete this role?",
+  coverage: "Coverage",
+  no_backup: "No Backup",
+  at_risk: "At Risk"
 };
 const persons$1 = {
   title: "People",
@@ -522,7 +538,9 @@ const persons$1 = {
   notes: "Notes",
   no_persons: "No people added yet.",
   assigned_roles: "Assigned Roles",
-  delete_confirm: "Are you sure you want to remove this person?"
+  delete_confirm: "Are you sure you want to remove this person?",
+  avatar: "Profile Photo",
+  upload_avatar: "Upload Photo"
 };
 const assignments$1 = {
   title: "Assign Person to Role",
@@ -540,7 +558,29 @@ const chart$1 = {
   zoom_in: "Zoom In",
   zoom_out: "Zoom Out",
   reset: "Reset View",
-  vacant: "Vacant"
+  vacant: "Vacant",
+  fullscreen: "Fullscreen",
+  exit_fullscreen: "Exit Fullscreen",
+  click_to_edit: "Click to edit"
+};
+const import_export$1 = {
+  export_roles: "Export Roles CSV",
+  export_people: "Export People CSV",
+  import_roles: "Import Roles CSV",
+  import_people: "Import People CSV",
+  select_file: "Select CSV File",
+  "import": "Import",
+  "export": "Export"
+};
+const activity$1 = {
+  title: "Activity Log",
+  created: "Created",
+  updated: "Updated",
+  deleted: "Deleted",
+  assigned: "Assigned",
+  unassigned: "Unassigned",
+  imported: "Imported",
+  no_activity: "No activity recorded yet."
 };
 const common$1 = {
   save: "Save",
@@ -554,7 +594,13 @@ const common$1 = {
   loading: "Loading...",
   confirm: "Confirm",
   yes: "Yes",
-  no: "No"
+  no: "No",
+  filter: "Filter",
+  all: "All",
+  clear_filters: "Clear Filters",
+  no_results: "No results found",
+  dark_mode: "Dark Mode",
+  light_mode: "Light Mode"
 };
 const en = {
   nav: nav$1,
@@ -566,6 +612,8 @@ const en = {
   persons: persons$1,
   assignments: assignments$1,
   chart: chart$1,
+  import_export: import_export$1,
+  activity: activity$1,
   common: common$1
 };
 const nav = {
@@ -578,7 +626,8 @@ const nav = {
   profile: "Profil",
   login: "Anmelden",
   register: "Registrieren",
-  logout: "Abmelden"
+  logout: "Abmelden",
+  activity_log: "Aktivitätsprotokoll"
 };
 const landing = {
   hero_title: "Ihre Organisation visualisieren & stärken",
@@ -637,8 +686,20 @@ const dashboard = {
   create_first: "Erste Organisation erstellen",
   total_roles: "Gesamtrollen",
   total_people: "Gesamtpersonen",
+  total_organizations: "Organisationen",
+  total_assignments: "Zuweisungen",
   view_chart: "Organigramm anzeigen",
-  manage: "Verwalten"
+  manage: "Verwalten",
+  analytics: "Analytik-Übersicht",
+  criticality_chart: "Rollen nach Kritikalität",
+  department_chart: "Rollen nach Abteilung",
+  coverage_chart: "Rollenabdeckung",
+  recent_activity: "Letzte Aktivitäten",
+  risk_roles: "Gefährdete Rollen",
+  risk_roles_desc: "Hohe/kritische Rollen ohne Zuweisungen",
+  filled: "Besetzt",
+  vacant: "Vakant",
+  no_activity: "Noch keine Aktivitäten"
 };
 const organizations = {
   title: "Organisationen",
@@ -674,7 +735,10 @@ const roles = {
   no_roles: "Noch keine Rollen definiert.",
   assign_person: "Person zuweisen",
   primary: "Primär",
-  delete_confirm: "Sind Sie sicher, dass Sie diese Rolle löschen möchten?"
+  delete_confirm: "Sind Sie sicher, dass Sie diese Rolle löschen möchten?",
+  coverage: "Abdeckung",
+  no_backup: "Keine Vertretung",
+  at_risk: "Gefährdet"
 };
 const persons = {
   title: "Personen",
@@ -689,7 +753,9 @@ const persons = {
   notes: "Notizen",
   no_persons: "Noch keine Personen hinzugefügt.",
   assigned_roles: "Zugewiesene Rollen",
-  delete_confirm: "Sind Sie sicher, dass Sie diese Person entfernen möchten?"
+  delete_confirm: "Sind Sie sicher, dass Sie diese Person entfernen möchten?",
+  avatar: "Profilfoto",
+  upload_avatar: "Foto hochladen"
 };
 const assignments = {
   title: "Person einer Rolle zuweisen",
@@ -707,7 +773,29 @@ const chart = {
   zoom_in: "Vergrößern",
   zoom_out: "Verkleinern",
   reset: "Ansicht zurücksetzen",
-  vacant: "Vakant"
+  vacant: "Vakant",
+  fullscreen: "Vollbild",
+  exit_fullscreen: "Vollbild beenden",
+  click_to_edit: "Klicken zum Bearbeiten"
+};
+const import_export = {
+  export_roles: "Rollen CSV exportieren",
+  export_people: "Personen CSV exportieren",
+  import_roles: "Rollen CSV importieren",
+  import_people: "Personen CSV importieren",
+  select_file: "CSV-Datei auswählen",
+  "import": "Importieren",
+  "export": "Exportieren"
+};
+const activity = {
+  title: "Aktivitätsprotokoll",
+  created: "Erstellt",
+  updated: "Aktualisiert",
+  deleted: "Gelöscht",
+  assigned: "Zugewiesen",
+  unassigned: "Zuweisung entfernt",
+  imported: "Importiert",
+  no_activity: "Noch keine Aktivitäten aufgezeichnet."
 };
 const common = {
   save: "Speichern",
@@ -721,7 +809,13 @@ const common = {
   loading: "Laden...",
   confirm: "Bestätigen",
   yes: "Ja",
-  no: "Nein"
+  no: "Nein",
+  filter: "Filter",
+  all: "Alle",
+  clear_filters: "Filter löschen",
+  no_results: "Keine Ergebnisse gefunden",
+  dark_mode: "Dunkelmodus",
+  light_mode: "Hellmodus"
 };
 const de = {
   nav,
@@ -733,6 +827,8 @@ const de = {
   persons,
   assignments,
   chart,
+  import_export,
+  activity,
   common
 };
 const i18n = createI18n({
@@ -747,7 +843,7 @@ createServer(
     page,
     render: renderToString,
     title: (title) => `${title} - ${appName}`,
-    resolve: (name) => resolvePageComponent(`./Pages/${name}.vue`, /* @__PURE__ */ Object.assign({ "./Pages/Assignments/Create.vue": () => import("./assets/Create-BXqkHIRD.js"), "./Pages/Auth/ConfirmPassword.vue": () => import("./assets/ConfirmPassword-CEOaFOKq.js"), "./Pages/Auth/ForgotPassword.vue": () => import("./assets/ForgotPassword-C4oexJkq.js"), "./Pages/Auth/Login.vue": () => import("./assets/Login-2SUo1cb1.js"), "./Pages/Auth/Register.vue": () => import("./assets/Register-CwZd1h6G.js"), "./Pages/Auth/ResetPassword.vue": () => import("./assets/ResetPassword-58H4tbyg.js"), "./Pages/Auth/VerifyEmail.vue": () => import("./assets/VerifyEmail-Sh_cV20p.js"), "./Pages/Dashboard.vue": () => import("./assets/Dashboard-CKb569Tq.js"), "./Pages/OrgChart/Index.vue": () => import("./assets/Index-CcnhS6ZU.js"), "./Pages/Organizations/Create.vue": () => import("./assets/Create-B9x3gtct.js"), "./Pages/Organizations/Edit.vue": () => import("./assets/Edit-XA6gGjyB.js"), "./Pages/Organizations/Index.vue": () => import("./assets/Index-DFgDkQPy.js"), "./Pages/Organizations/Show.vue": () => import("./assets/Show-Ces-f1db.js"), "./Pages/Persons/Create.vue": () => import("./assets/Create-Cer2HWBv.js"), "./Pages/Persons/Edit.vue": () => import("./assets/Edit-DeZuUnP6.js"), "./Pages/Persons/Index.vue": () => import("./assets/Index-ByuV6-Xc.js"), "./Pages/Profile/Edit.vue": () => import("./assets/Edit-QRSvDQ1d.js"), "./Pages/Profile/Partials/DeleteUserForm.vue": () => import("./assets/DeleteUserForm-BjKvmK82.js"), "./Pages/Profile/Partials/UpdatePasswordForm.vue": () => import("./assets/UpdatePasswordForm-Dit84Uro.js"), "./Pages/Profile/Partials/UpdateProfileInformationForm.vue": () => import("./assets/UpdateProfileInformationForm-BnkjDMej.js"), "./Pages/Roles/Create.vue": () => import("./assets/Create-CJlnlh6Y.js"), "./Pages/Roles/Edit.vue": () => import("./assets/Edit-ChtRZCnY.js"), "./Pages/Roles/Index.vue": () => import("./assets/Index-Cqyg58J8.js"), "./Pages/Welcome.vue": () => import("./assets/Welcome-DCWiwsZV.js") })),
+    resolve: (name) => resolvePageComponent(`./Pages/${name}.vue`, /* @__PURE__ */ Object.assign({ "./Pages/ActivityLog/Index.vue": () => import("./assets/Index-6rZgvOe1.js"), "./Pages/Assignments/Create.vue": () => import("./assets/Create-D7eOzpNM.js"), "./Pages/Auth/ConfirmPassword.vue": () => import("./assets/ConfirmPassword-CEOaFOKq.js"), "./Pages/Auth/ForgotPassword.vue": () => import("./assets/ForgotPassword-C4oexJkq.js"), "./Pages/Auth/Login.vue": () => import("./assets/Login-2SUo1cb1.js"), "./Pages/Auth/Register.vue": () => import("./assets/Register-CwZd1h6G.js"), "./Pages/Auth/ResetPassword.vue": () => import("./assets/ResetPassword-58H4tbyg.js"), "./Pages/Auth/VerifyEmail.vue": () => import("./assets/VerifyEmail-Sh_cV20p.js"), "./Pages/Dashboard.vue": () => import("./assets/Dashboard-Ci18P7DJ.js"), "./Pages/OrgChart/Index.vue": () => import("./assets/Index-fENg3r-o.js"), "./Pages/Organizations/Create.vue": () => import("./assets/Create-ChNv_2fR.js"), "./Pages/Organizations/Edit.vue": () => import("./assets/Edit-DRY4C4t7.js"), "./Pages/Organizations/Index.vue": () => import("./assets/Index-B_ryUUnr.js"), "./Pages/Organizations/Show.vue": () => import("./assets/Show-DqeM5nGC.js"), "./Pages/Persons/Create.vue": () => import("./assets/Create-BqY_TaEF.js"), "./Pages/Persons/Edit.vue": () => import("./assets/Edit-i-oZx8OC.js"), "./Pages/Persons/Index.vue": () => import("./assets/Index-Ml0ffeNF.js"), "./Pages/Profile/Edit.vue": () => import("./assets/Edit-CqYdFhwe.js"), "./Pages/Profile/Partials/DeleteUserForm.vue": () => import("./assets/DeleteUserForm-BjKvmK82.js"), "./Pages/Profile/Partials/UpdatePasswordForm.vue": () => import("./assets/UpdatePasswordForm-Dit84Uro.js"), "./Pages/Profile/Partials/UpdateProfileInformationForm.vue": () => import("./assets/UpdateProfileInformationForm-BnkjDMej.js"), "./Pages/Roles/Create.vue": () => import("./assets/Create-UnooNnFZ.js"), "./Pages/Roles/Edit.vue": () => import("./assets/Edit-BBPk_OzI.js"), "./Pages/Roles/Index.vue": () => import("./assets/Index-Dg4sFK63.js"), "./Pages/Welcome.vue": () => import("./assets/Welcome-DCWiwsZV.js") })),
     setup({ App, props, plugin }) {
       const locale = page.props.locale || "en";
       i18n.global.locale.value = locale;

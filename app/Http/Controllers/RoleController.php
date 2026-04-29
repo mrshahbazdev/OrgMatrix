@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ActivityLog;
 use App\Models\Organization;
 use App\Models\Role;
 use Illuminate\Http\Request;
@@ -49,7 +50,9 @@ class RoleController extends Controller
             'criticality' => 'required|in:low,medium,high,critical',
         ]);
 
-        $organization->roles()->create($validated);
+        $role = $organization->roles()->create($validated);
+
+        ActivityLog::log('created', 'Role', $role->id, $role->name, $organization->id);
 
         return redirect()->route('organizations.roles.index', $organization)
             ->with('success', 'Role created successfully.');
@@ -86,6 +89,8 @@ class RoleController extends Controller
 
         $role->update($validated);
 
+        ActivityLog::log('updated', 'Role', $role->id, $role->name, $organization->id);
+
         return redirect()->route('organizations.roles.index', $organization)
             ->with('success', 'Role updated successfully.');
     }
@@ -94,7 +99,10 @@ class RoleController extends Controller
     {
         $this->authorizeOrganization($organization);
 
+        $name = $role->name;
         $role->delete();
+
+        ActivityLog::log('deleted', 'Role', null, $name, $organization->id);
 
         return redirect()->route('organizations.roles.index', $organization)
             ->with('success', 'Role deleted successfully.');
