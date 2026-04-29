@@ -42,7 +42,7 @@ class OrganizationController extends Controller
 
     public function show(Organization $organization)
     {
-        $this->authorize($organization);
+        $this->authorizeOrganization($organization);
 
         $organization->load([
             'roles' => fn($q) => $q->withCount('assignments'),
@@ -64,7 +64,7 @@ class OrganizationController extends Controller
 
     public function edit(Organization $organization)
     {
-        $this->authorize($organization);
+        $this->authorizeOrganization($organization);
 
         return Inertia::render('Organizations/Edit', [
             'organization' => $organization,
@@ -73,7 +73,7 @@ class OrganizationController extends Controller
 
     public function update(Request $request, Organization $organization)
     {
-        $this->authorize($organization);
+        $this->authorizeOrganization($organization);
 
         $validated = $request->validate([
             'name' => 'required|string|max:255',
@@ -89,7 +89,7 @@ class OrganizationController extends Controller
 
     public function destroy(Organization $organization)
     {
-        $this->authorize($organization);
+        $this->authorizeOrganization($organization);
 
         $organization->delete();
 
@@ -97,7 +97,7 @@ class OrganizationController extends Controller
             ->with('success', 'Organization deleted successfully.');
     }
 
-    private function authorize(Organization $organization): void
+    private function authorizeOrganization(Organization $organization): void
     {
         abort_unless($organization->user_id === Auth::id(), 403);
     }

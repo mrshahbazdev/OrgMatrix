@@ -12,7 +12,7 @@ class PersonController extends Controller
 {
     public function index(Organization $organization)
     {
-        $this->authorize($organization);
+        $this->authorizeOrganization($organization);
 
         $people = $organization->people()
             ->with('roles')
@@ -27,7 +27,7 @@ class PersonController extends Controller
 
     public function create(Organization $organization)
     {
-        $this->authorize($organization);
+        $this->authorizeOrganization($organization);
 
         return Inertia::render('Persons/Create', [
             'organization' => $organization,
@@ -36,7 +36,7 @@ class PersonController extends Controller
 
     public function store(Request $request, Organization $organization)
     {
-        $this->authorize($organization);
+        $this->authorizeOrganization($organization);
 
         $validated = $request->validate([
             'first_name' => 'required|string|max:255',
@@ -56,7 +56,7 @@ class PersonController extends Controller
 
     public function edit(Organization $organization, Person $person)
     {
-        $this->authorize($organization);
+        $this->authorizeOrganization($organization);
 
         $person->load('roles');
 
@@ -68,7 +68,7 @@ class PersonController extends Controller
 
     public function update(Request $request, Organization $organization, Person $person)
     {
-        $this->authorize($organization);
+        $this->authorizeOrganization($organization);
 
         $validated = $request->validate([
             'first_name' => 'required|string|max:255',
@@ -89,7 +89,7 @@ class PersonController extends Controller
 
     public function destroy(Organization $organization, Person $person)
     {
-        $this->authorize($organization);
+        $this->authorizeOrganization($organization);
 
         $person->delete();
 
@@ -97,7 +97,7 @@ class PersonController extends Controller
             ->with('success', 'Person removed successfully.');
     }
 
-    private function authorize(Organization $organization): void
+    private function authorizeOrganization(Organization $organization): void
     {
         abort_unless($organization->user_id === Auth::id(), 403);
     }

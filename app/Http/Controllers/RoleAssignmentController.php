@@ -13,7 +13,7 @@ class RoleAssignmentController extends Controller
 {
     public function create(Organization $organization, Role $role)
     {
-        $this->authorize($organization);
+        $this->authorizeOrganization($organization);
 
         $availablePeople = $organization->people()
             ->whereNotIn('id', $role->assignments()->pluck('person_id'))
@@ -28,7 +28,7 @@ class RoleAssignmentController extends Controller
 
     public function store(Request $request, Organization $organization, Role $role)
     {
-        $this->authorize($organization);
+        $this->authorizeOrganization($organization);
 
         $validated = $request->validate([
             'person_id' => 'required|exists:people,id',
@@ -50,7 +50,7 @@ class RoleAssignmentController extends Controller
 
     public function destroy(Organization $organization, Role $role, RoleAssignment $assignment)
     {
-        $this->authorize($organization);
+        $this->authorizeOrganization($organization);
 
         $assignment->delete();
 
@@ -58,7 +58,7 @@ class RoleAssignmentController extends Controller
             ->with('success', 'Assignment removed successfully.');
     }
 
-    private function authorize(Organization $organization): void
+    private function authorizeOrganization(Organization $organization): void
     {
         abort_unless($organization->user_id === Auth::id(), 403);
     }
