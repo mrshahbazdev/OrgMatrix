@@ -1,0 +1,113 @@
+{
+  "\u0000plugin-vue:export-helper": [
+    "/build/assets/_plugin-vue_export-helper-1tPrXgE0.js"
+  ],
+  "node_modules/laravel-vite-plugin/inertia-helpers/index.js": [],
+  "resources/js/Components/DangerButton.vue": [
+    "/build/assets/DeleteUserForm-BjKvmK82.js"
+  ],
+  "resources/js/Components/InputError.vue": [
+    "/build/assets/TextInput-vfWly7IM.js"
+  ],
+  "resources/js/Components/InputLabel.vue": [
+    "/build/assets/TextInput-vfWly7IM.js"
+  ],
+  "resources/js/Components/LanguageSwitcher.vue": [
+    "/build/assets/LanguageSwitcher-DWy6sQ-D.js"
+  ],
+  "resources/js/Components/Modal.vue": [
+    "/build/assets/DeleteUserForm-BjKvmK82.js"
+  ],
+  "resources/js/Components/PrimaryButton.vue": [
+    "/build/assets/PrimaryButton-CZbnR4E4.js"
+  ],
+  "resources/js/Components/SecondaryButton.vue": [
+    "/build/assets/DeleteUserForm-BjKvmK82.js"
+  ],
+  "resources/js/Components/TextInput.vue": [
+    "/build/assets/TextInput-vfWly7IM.js"
+  ],
+  "resources/js/Layouts/AuthenticatedLayout.vue": [
+    "/build/assets/AuthenticatedLayout-Cwxv3suN.js"
+  ],
+  "resources/js/Layouts/GuestLayout.vue": [
+    "/build/assets/GuestLayout-7rtMOgD2.js"
+  ],
+  "resources/js/Pages/Assignments/Create.vue": [
+    "/build/assets/Create-BXqkHIRD.js"
+  ],
+  "resources/js/Pages/Auth/ConfirmPassword.vue": [
+    "/build/assets/ConfirmPassword-CEOaFOKq.js"
+  ],
+  "resources/js/Pages/Auth/ForgotPassword.vue": [
+    "/build/assets/ForgotPassword-C4oexJkq.js"
+  ],
+  "resources/js/Pages/Auth/Login.vue": [
+    "/build/assets/Login-2SUo1cb1.js"
+  ],
+  "resources/js/Pages/Auth/Register.vue": [
+    "/build/assets/Register-CwZd1h6G.js"
+  ],
+  "resources/js/Pages/Auth/ResetPassword.vue": [
+    "/build/assets/ResetPassword-58H4tbyg.js"
+  ],
+  "resources/js/Pages/Auth/VerifyEmail.vue": [
+    "/build/assets/VerifyEmail-Sh_cV20p.js"
+  ],
+  "resources/js/Pages/Dashboard.vue": [
+    "/build/assets/Dashboard-CKb569Tq.js"
+  ],
+  "resources/js/Pages/OrgChart/Index.vue": [
+    "/build/assets/Index-CcnhS6ZU.js"
+  ],
+  "resources/js/Pages/Organizations/Create.vue": [
+    "/build/assets/Create-B9x3gtct.js"
+  ],
+  "resources/js/Pages/Organizations/Edit.vue": [
+    "/build/assets/Edit-XA6gGjyB.js"
+  ],
+  "resources/js/Pages/Organizations/Index.vue": [
+    "/build/assets/Index-DFgDkQPy.js"
+  ],
+  "resources/js/Pages/Organizations/Show.vue": [
+    "/build/assets/Show-Ces-f1db.js"
+  ],
+  "resources/js/Pages/Persons/Create.vue": [
+    "/build/assets/Create-Cer2HWBv.js"
+  ],
+  "resources/js/Pages/Persons/Edit.vue": [
+    "/build/assets/Edit-DeZuUnP6.js"
+  ],
+  "resources/js/Pages/Persons/Index.vue": [
+    "/build/assets/Index-ByuV6-Xc.js"
+  ],
+  "resources/js/Pages/Profile/Edit.vue": [
+    "/build/assets/Edit-QRSvDQ1d.js"
+  ],
+  "resources/js/Pages/Profile/Partials/DeleteUserForm.vue": [
+    "/build/assets/DeleteUserForm-BjKvmK82.js"
+  ],
+  "resources/js/Pages/Profile/Partials/UpdatePasswordForm.vue": [
+    "/build/assets/UpdatePasswordForm-Dit84Uro.js"
+  ],
+  "resources/js/Pages/Profile/Partials/UpdateProfileInformationForm.vue": [
+    "/build/assets/UpdateProfileInformationForm-BnkjDMej.js"
+  ],
+  "resources/js/Pages/Roles/Create.vue": [
+    "/build/assets/Create-CJlnlh6Y.js"
+  ],
+  "resources/js/Pages/Roles/Edit.vue": [
+    "/build/assets/Edit-ChtRZCnY.js"
+  ],
+  "resources/js/Pages/Roles/Index.vue": [
+    "/build/assets/Index-Cqyg58J8.js"
+  ],
+  "resources/js/Pages/Welcome.vue": [
+    "/build/assets/Welcome-DCWiwsZV.js"
+  ],
+  "resources/js/i18n/de.json": [],
+  "resources/js/i18n/en.json": [],
+  "resources/js/i18n/index.js": [],
+  "resources/js/ssr.js": [],
+  "vendor/tightenco/ziggy/dist/index.js": []
+}
