@@ -159,7 +159,9 @@
         "vacant": "Vakant",
         "fullscreen": "Vollbild",
         "exit_fullscreen": "Vollbild beenden",
-        "click_to_edit": "Klicken zum Bearbeiten"
+        "click_to_edit": "Klicken zum Bearbeiten",
+        "print": "Drucken",
+        "export_png": "PNG exportieren"
     },
     "import_export": {
         "export_roles": "Rollen CSV exportieren",
@@ -179,6 +181,26 @@
         "unassigned": "Zuweisung entfernt",
         "imported": "Importiert",
         "no_activity": "Noch keine Aktivitäten aufgezeichnet."
+    },
+    "succession": {
+        "title": "Nachfolgeplanung",
+        "dashboard_title": "Nachfolgeplanung Übersicht",
+        "horizon": "Nachfolge-Horizont",
+        "readiness": "Bereitschaft",
+        "none": "Kein Nachfolger",
+        "short": "Kurzfristig (0–6 Mo.)",
+        "mid": "Mittelfristig (6–18 Mo.)",
+        "long": "Langfristig (18+ Mo.)",
+        "readiness_1": "Nicht bereit",
+        "readiness_2": "In Entwicklung",
+        "readiness_3": "Annähernd bereit",
+        "readiness_4": "Bereit",
+        "readiness_5": "Voll einsatzbereit",
+        "roles_with_successors": "Rollen mit Nachfolgern",
+        "critical_without_backup": "Kritische Rollen ohne Vertretung",
+        "avg_readiness": "Durchschn. Bereitschaftswert",
+        "by_horizon": "Nachfolger nach Horizont",
+        "has_successor": "Hat Nachfolger"
     },
     "common": {
         "save": "Speichern",

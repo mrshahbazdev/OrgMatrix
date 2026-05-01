@@ -9,6 +9,8 @@ const props = defineProps({ organization: Object, role: Object, availablePeople:
 const form = useForm({
     person_id: '',
     is_primary: false,
+    succession_horizon: '',
+    readiness_score: '',
     start_date: '',
     end_date: '',
     notes: '',
@@ -39,6 +41,8 @@ const removeAssignment = (assignment) => {
                             <div>
                                 <span class="text-sm font-medium text-gray-900">{{ a.person?.full_name }}</span>
                                 <span v-if="a.is_primary" class="ml-2 rounded-full bg-indigo-100 px-2 py-0.5 text-xs font-medium text-indigo-700">{{ t('roles.primary') }}</span>
+                                <span v-if="a.succession_horizon" class="ml-1 rounded-full bg-amber-100 px-2 py-0.5 text-xs font-medium text-amber-700">{{ t('succession.' + a.succession_horizon) }}</span>
+                                <span v-if="a.readiness_score" class="ml-1 text-xs text-gray-500">{{ t('succession.readiness') }}: {{ a.readiness_score }}/5</span>
                             </div>
                         </div>
                         <button @click="removeAssignment(a)" class="text-sm text-red-600 hover:text-red-700">{{ t('common.delete') }}</button>
@@ -64,6 +68,30 @@ const removeAssignment = (assignment) => {
                         <input v-model="form.is_primary" type="checkbox" class="rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" />
                         <span class="text-sm text-gray-700">{{ t('assignments.is_primary') }}</span>
                     </label>
+
+                    <!-- Succession Planning -->
+                    <div class="rounded-xl border border-indigo-100 dark:border-indigo-800 bg-indigo-50/50 dark:bg-indigo-900/20 p-4 space-y-4">
+                        <h4 class="text-sm font-semibold text-indigo-900 dark:text-indigo-300">{{ t('succession.title') }}</h4>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">{{ t('succession.horizon') }}</label>
+                                <select v-model="form.succession_horizon" class="block w-full rounded-xl border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 px-4 py-3 text-sm focus:border-indigo-500 focus:ring-indigo-500 transition">
+                                    <option value="">{{ t('succession.none') }}</option>
+                                    <option value="short">{{ t('succession.short') }}</option>
+                                    <option value="mid">{{ t('succession.mid') }}</option>
+                                    <option value="long">{{ t('succession.long') }}</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">{{ t('succession.readiness') }}</label>
+                                <select v-model="form.readiness_score" class="block w-full rounded-xl border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 px-4 py-3 text-sm focus:border-indigo-500 focus:ring-indigo-500 transition">
+                                    <option value="">—</option>
+                                    <option v-for="n in 5" :key="n" :value="n">{{ n }} — {{ t('succession.readiness_' + n) }}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="grid grid-cols-2 gap-4">
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-1.5">{{ t('assignments.start_date') }}</label>

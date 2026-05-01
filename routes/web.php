@@ -36,6 +36,14 @@ Route::get('/dashboard', function () {
         $allPeople = $allPeople->merge($org->people);
     }
 
+    $allAssignments = $allRoles->flatMap(fn($r) => $r->assignments);
+    $rolesWithSuccessors = $allRoles->filter(fn($r) => $r->assignments->contains(fn($a) => $a->succession_horizon !== null));
+    $criticalWithoutBackup = $allRoles->filter(fn($r) =>
+        in_array($r->criticality, ['high', 'critical'])
+        && $r->assignments->count() <= 1
+        && !$r->assignments->contains(fn($a) => $a->succession_horizon !== null)
+    );
+
     $analytics = [
         'total_organizations' => $organizations->count(),
         'total_roles' => $allRoles->count(),
@@ -53,6 +61,16 @@ Route::get('/dashboard', function () {
             'vacant' => $allRoles->filter(fn($r) => $r->assignments->count() === 0)->count(),
         ],
         'risk_roles' => $allRoles->filter(fn($r) => $r->assignments->count() === 0 && in_array($r->criticality, ['high', 'critical']))->count(),
+        'succession' => [
+            'roles_with_successors' => $rolesWithSuccessors->count(),
+            'critical_without_backup' => $criticalWithoutBackup->count(),
+            'avg_readiness' => $allAssignments->whereNotNull('readiness_score')->avg('readiness_score'),
+            'by_horizon' => [
+                'short' => $allAssignments->where('succession_horizon', 'short')->count(),
+                'mid' => $allAssignments->where('succession_horizon', 'mid')->count(),
+                'long' => $allAssignments->where('succession_horizon', 'long')->count(),
+            ],
+        ],
     ];
 
     $recentActivity = ActivityLog::where('user_id', $user->id)

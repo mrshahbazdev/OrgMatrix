@@ -143,6 +143,24 @@ const renderChart = () => {
             d3.select(this).append('text').attr('text-anchor', 'middle').attr('y', 4).attr('font-size', '12px').attr('font-weight', 'bold').attr('fill', '#ef4444').text('!');
         });
 
+    // No-backup warning for filled high/critical roles without successor
+    nodes.filter(d => d.parent && d.data.person && d.data.criticality && ['high', 'critical'].includes(d.data.criticality) && !d.data.has_backup)
+        .append('g')
+        .attr('transform', 'translate(72, -32)')
+        .each(function() {
+            d3.select(this).append('rect').attr('x', -22).attr('y', -8).attr('width', 44).attr('height', 16).attr('rx', 8).attr('fill', '#fef3c7').attr('stroke', '#f59e0b');
+            d3.select(this).append('text').attr('text-anchor', 'middle').attr('y', 4).attr('font-size', '7px').attr('font-weight', '600').attr('fill', '#92400e').text(t('roles.no_backup'));
+        });
+
+    // Successor count badge
+    nodes.filter(d => d.parent && d.data.successors?.length > 0)
+        .append('g')
+        .attr('transform', 'translate(-72, 20)')
+        .each(function(d) {
+            d3.select(this).append('rect').attr('x', -16).attr('y', -8).attr('width', 32).attr('height', 16).attr('rx', 8).attr('fill', '#ecfdf5').attr('stroke', '#10b981');
+            d3.select(this).append('text').attr('text-anchor', 'middle').attr('y', 4).attr('font-size', '8px').attr('font-weight', '600').attr('fill', '#065f46').text(`${d.data.successors.length} ✓`);
+        });
+
     // Criticality indicator
     nodes.filter(d => d.data.criticality)
         .append('circle')
@@ -189,6 +207,14 @@ const renderChart = () => {
             if (d.data.person) tip += `\n${d.data.person.name}`;
             else tip += `\n${t('chart.vacant')}`;
             if (d.data.criticality) tip += `\n${t('roles.criticality')}: ${t('roles.' + d.data.criticality)}`;
+            if (d.data.successors?.length) {
+                tip += `\n${t('succession.title')}: ${d.data.successors.length}`;
+                d.data.successors.forEach(s => {
+                    tip += `\n  • ${s.person_name} (${t('succession.' + s.horizon)}, ${t('succession.readiness')}: ${s.readiness || '-'}/5)`;
+                });
+            } else if (d.parent && d.data.criticality && ['high', 'critical'].includes(d.data.criticality) && !d.data.has_backup) {
+                tip += `\n⚠ ${t('roles.no_backup')}`;
+            }
             tip += `\n${t('chart.click_to_edit')}`;
             return tip;
         });
@@ -213,6 +239,77 @@ const toggleFullscreen = () => {
         document.exitFullscreen?.();
         isFullscreen.value = false;
     }
+};
+
+const printChart = () => {
+    const svg = svgRef.value;
+    if (!svg) return;
+
+    const clonedSvg = svg.cloneNode(true);
+    const bbox = svg.getBBox();
+    const padding = 40;
+    clonedSvg.setAttribute('viewBox', `${bbox.x - padding} ${bbox.y - padding} ${bbox.width + padding * 2} ${bbox.height + padding * 2}`);
+    clonedSvg.setAttribute('width', bbox.width + padding * 2);
+    clonedSvg.setAttribute('height', bbox.height + padding * 2);
+    clonedSvg.removeAttribute('transform');
+
+    const svgData = new XMLSerializer().serializeToString(clonedSvg);
+    const printWindow = window.open('', '_blank');
+    printWindow.document.write(`
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <title>${props.organization.name} — ${t('chart.title')}</title>
+            <style>
+                @media print { @page { size: landscape; margin: 10mm; } }
+                body { margin: 0; display: flex; flex-direction: column; align-items: center; font-family: sans-serif; }
+                h1 { font-size: 18px; margin: 16px 0 8px; color: #1e1b4b; }
+                p { font-size: 11px; color: #6b7280; margin: 0 0 12px; }
+                svg { max-width: 100%; height: auto; }
+            </style>
+        </head>
+        <body>
+            <h1>${props.organization.name}</h1>
+            <p>${t('chart.title')} — ${new Date().toLocaleDateString()}</p>
+            ${svgData}
+            <script>window.onload = () => { window.print(); }<\/script>
+        </body>
+        </html>
+    `);
+    printWindow.document.close();
+};
+
+const exportPng = () => {
+    const svg = svgRef.value;
+    if (!svg) return;
+
+    const clonedSvg = svg.cloneNode(true);
+    const bbox = svg.getBBox();
+    const padding = 40;
+    const w = bbox.width + padding * 2;
+    const h = bbox.height + padding * 2;
+    clonedSvg.setAttribute('viewBox', `${bbox.x - padding} ${bbox.y - padding} ${w} ${h}`);
+    clonedSvg.setAttribute('width', w * 2);
+    clonedSvg.setAttribute('height', h * 2);
+    clonedSvg.removeAttribute('transform');
+
+    const svgData = new XMLSerializer().serializeToString(clonedSvg);
+    const canvas = document.createElement('canvas');
+    canvas.width = w * 2;
+    canvas.height = h * 2;
+    const ctx = canvas.getContext('2d');
+    ctx.fillStyle = '#ffffff';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    const img = new Image();
+    img.onload = () => {
+        ctx.drawImage(img, 0, 0);
+        const a = document.createElement('a');
+        a.download = `${props.organization.name}-org-chart.png`;
+        a.href = canvas.toDataURL('image/png');
+        a.click();
+    };
+    img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svgData);
 };
 
 onMounted(() => {
@@ -257,13 +354,23 @@ watch(() => props.chartData, () => renderChart(), { deep: true });
                         {{ t('chart.reset') }}
                     </button>
                 </div>
-                <button @click="toggleFullscreen" class="flex h-9 items-center gap-2 rounded-xl border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 px-3 text-xs font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition">
+                <div class="flex items-center gap-2">
+                    <button @click="printChart" class="flex h-9 items-center gap-2 rounded-xl border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 px-3 text-xs font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition" :title="t('chart.print')">
+                        <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" /></svg>
+                        {{ t('chart.print') }}
+                    </button>
+                    <button @click="exportPng" class="flex h-9 items-center gap-2 rounded-xl border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 px-3 text-xs font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition" :title="t('chart.export_png')">
+                        <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
+                        {{ t('chart.export_png') }}
+                    </button>
+                    <button @click="toggleFullscreen" class="flex h-9 items-center gap-2 rounded-xl border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 px-3 text-xs font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition">
                     <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path v-if="!isFullscreen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
                         <path v-else stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 9V4H4m0 0l5 5m6-1V4h4m0 0l-5 5M9 15v5H4m0 0l5-5m6 1v4h5m0 0l-5-5" />
                     </svg>
                     {{ isFullscreen ? t('chart.exit_fullscreen') : t('chart.fullscreen') }}
-                </button>
+                    </button>
+                </div>
             </div>
 
             <div ref="containerRef" class="rounded-2xl border border-gray-100 dark:border-gray-700 bg-white dark:bg-gray-800 p-4 shadow-sm overflow-hidden" style="min-height: 600px;">
@@ -296,6 +403,13 @@ watch(() => props.chartData, () => renderChart(), { deep: true });
                 <div class="flex items-center gap-2">
                     <div class="flex h-4 w-4 items-center justify-center rounded-full border border-red-400 bg-red-50 text-[8px] font-bold text-red-500">!</div>
                     <span class="text-xs text-gray-600 dark:text-gray-400">{{ t('roles.at_risk') }}</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <div class="h-4 w-8 rounded-full border border-amber-400 bg-amber-50 flex items-center justify-center text-[7px] font-semibold text-amber-800">{{ t('roles.no_backup') }}</div>
+                </div>
+                <div class="flex items-center gap-2">
+                    <div class="h-4 w-8 rounded-full border border-emerald-400 bg-emerald-50 flex items-center justify-center text-[8px] font-semibold text-emerald-800">1 &#10003;</div>
+                    <span class="text-xs text-gray-600 dark:text-gray-400">{{ t('succession.has_successor') }}</span>
                 </div>
 
                 <!-- Department Colors -->

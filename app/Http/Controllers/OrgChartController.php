@@ -34,6 +34,17 @@ class OrgChartController extends Controller
             $primaryAssignment = $role->assignments->firstWhere('is_primary', true);
             $person = $primaryAssignment ? $primaryAssignment->person : null;
 
+            $successors = $role->assignments
+                ->filter(fn ($a) => $a->succession_horizon !== null)
+                ->map(fn ($a) => [
+                    'person_name' => $a->person?->full_name,
+                    'horizon' => $a->succession_horizon,
+                    'readiness' => $a->readiness_score,
+                ]);
+
+            $hasBackup = $role->assignments->count() > 1
+                || $role->assignments->where('succession_horizon', '!=', null)->isNotEmpty();
+
             $tree[] = [
                 'id' => $role->id,
                 'role_id' => $role->id,
@@ -48,6 +59,8 @@ class OrgChartController extends Controller
                     'avatar' => $person->avatar,
                 ] : null,
                 'assignee_count' => $role->assignments->count(),
+                'has_backup' => $hasBackup,
+                'successors' => $successors->values(),
                 'children' => $this->buildTree($roles, $role->id),
             ];
         }

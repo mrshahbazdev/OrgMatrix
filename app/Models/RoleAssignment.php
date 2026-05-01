@@ -14,6 +14,8 @@ class RoleAssignment extends Model
         'role_id',
         'person_id',
         'is_primary',
+        'succession_horizon',
+        'readiness_score',
         'start_date',
         'end_date',
         'notes',
@@ -21,6 +23,7 @@ class RoleAssignment extends Model
 
     protected $casts = [
         'is_primary' => 'boolean',
+        'readiness_score' => 'integer',
         'start_date' => 'date',
         'end_date' => 'date',
     ];
