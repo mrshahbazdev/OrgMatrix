@@ -159,7 +159,9 @@
         "vacant": "Vacant",
         "fullscreen": "Fullscreen",
         "exit_fullscreen": "Exit Fullscreen",
-        "click_to_edit": "Click to edit"
+        "click_to_edit": "Click to edit",
+        "print": "Print",
+        "export_png": "Export PNG"
     },
     "import_export": {
         "export_roles": "Export Roles CSV",
@@ -179,6 +181,26 @@
         "unassigned": "Unassigned",
         "imported": "Imported",
         "no_activity": "No activity recorded yet."
+    },
+    "succession": {
+        "title": "Succession Planning",
+        "dashboard_title": "Succession Planning Overview",
+        "horizon": "Succession Horizon",
+        "readiness": "Readiness",
+        "none": "Not a successor",
+        "short": "Short-term (0-6 mo)",
+        "mid": "Mid-term (6-18 mo)",
+        "long": "Long-term (18+ mo)",
+        "readiness_1": "Not Ready",
+        "readiness_2": "Developing",
+        "readiness_3": "Approaching",
+        "readiness_4": "Ready",
+        "readiness_5": "Fully Ready",
+        "roles_with_successors": "Roles with Successors",
+        "critical_without_backup": "Critical Roles Without Backup",
+        "avg_readiness": "Avg. Readiness Score",
+        "by_horizon": "Successors by Horizon",
+        "has_successor": "Has Successor"
     },
     "common": {
         "save": "Save",

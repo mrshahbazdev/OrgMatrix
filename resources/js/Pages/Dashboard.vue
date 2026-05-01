@@ -178,6 +178,33 @@ const timeAgo = (date) => {
                 </div>
             </div>
 
+            <!-- Succession Planning Summary -->
+            <div v-if="analytics?.succession" class="mb-6 rounded-2xl border border-indigo-100 dark:border-indigo-800 bg-indigo-50/30 dark:bg-indigo-900/10 p-5 shadow-sm">
+                <h3 class="text-sm font-semibold text-indigo-900 dark:text-indigo-300 mb-4">{{ t('succession.dashboard_title') }}</h3>
+                <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div class="rounded-xl bg-white dark:bg-gray-800 p-4 border border-gray-100 dark:border-gray-700">
+                        <p class="text-2xl font-bold text-indigo-600 dark:text-indigo-400">{{ analytics.succession.roles_with_successors || 0 }}</p>
+                        <p class="text-xs text-gray-500 dark:text-gray-400">{{ t('succession.roles_with_successors') }}</p>
+                    </div>
+                    <div class="rounded-xl bg-white dark:bg-gray-800 p-4 border border-gray-100 dark:border-gray-700">
+                        <p class="text-2xl font-bold" :class="analytics.succession.critical_without_backup > 0 ? 'text-red-600 dark:text-red-400' : 'text-emerald-600 dark:text-emerald-400'">{{ analytics.succession.critical_without_backup || 0 }}</p>
+                        <p class="text-xs text-gray-500 dark:text-gray-400">{{ t('succession.critical_without_backup') }}</p>
+                    </div>
+                    <div class="rounded-xl bg-white dark:bg-gray-800 p-4 border border-gray-100 dark:border-gray-700">
+                        <p class="text-2xl font-bold text-amber-600 dark:text-amber-400">{{ analytics.succession.avg_readiness ? analytics.succession.avg_readiness.toFixed(1) : '—' }}</p>
+                        <p class="text-xs text-gray-500 dark:text-gray-400">{{ t('succession.avg_readiness') }}</p>
+                    </div>
+                    <div class="rounded-xl bg-white dark:bg-gray-800 p-4 border border-gray-100 dark:border-gray-700">
+                        <div class="flex items-center gap-3 text-xs">
+                            <span class="font-medium text-emerald-600 dark:text-emerald-400">{{ analytics.succession.by_horizon?.short || 0 }} {{ t('succession.short') }}</span>
+                            <span class="font-medium text-amber-600 dark:text-amber-400">{{ analytics.succession.by_horizon?.mid || 0 }} {{ t('succession.mid') }}</span>
+                            <span class="font-medium text-blue-600 dark:text-blue-400">{{ analytics.succession.by_horizon?.long || 0 }} {{ t('succession.long') }}</span>
+                        </div>
+                        <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">{{ t('succession.by_horizon') }}</p>
+                    </div>
+                </div>
+            </div>
+
             <!-- Organizations + Activity -->
             <div class="grid gap-6 lg:grid-cols-3">
                 <!-- Organization Cards -->

@@ -34,6 +34,8 @@ class RoleAssignmentController extends Controller
         $validated = $request->validate([
             'person_id' => 'required|exists:people,id',
             'is_primary' => 'boolean',
+            'succession_horizon' => 'nullable|in:short,mid,long',
+            'readiness_score' => 'nullable|integer|min:1|max:5',
             'start_date' => 'nullable|date',
             'end_date' => 'nullable|date|after_or_equal:start_date',
             'notes' => 'nullable|string',

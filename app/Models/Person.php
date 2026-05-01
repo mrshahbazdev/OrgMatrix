@@ -51,7 +51,7 @@ class Person extends Model
     public function roles(): BelongsToMany
     {
         return $this->belongsToMany(Role::class, 'role_assignments')
-            ->withPivot('is_primary', 'start_date', 'end_date', 'notes')
+            ->withPivot('is_primary', 'succession_horizon', 'readiness_score', 'start_date', 'end_date', 'notes')
             ->withTimestamps();
     }
 }
